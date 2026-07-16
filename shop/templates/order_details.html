@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<main id="main" class="main" style="margin-left: 0px;">
+  <div class="container mt-3">
+    <section class="section register d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-lg-4 col-md-4">
+                <h5 class="card-title text-center fs-4 mb-1">Order Details</h5>
+                <ul class="list-group">
+                  <li class="list-group-item"><strong>Full Name:</strong> {{ order.full_name }}</li>
+                  <li class="list-group-item"><strong>Email:</strong> {{ order.email }}</li>
+                  <li class="list-group-item"><strong>Address:</strong> {{ order.shipping_address }}</li>
+                  <li class="list-group-item"><strong>Date Ordered:</strong> {{ order.date_ordered }}</li>
+                  <li class="list-group-item"><strong>Last Update:</strong> {{ order.last_update }}</li>
+                  <li class="list-group-item"><strong>Status:</strong> {{ order.status }}</li>
+                </ul>
+              </div>
+
+              <div class="col-lg-8 col-md-8">
+                <h5 class="card-title text-center fs-4 mb-1">Product Details</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead class="table-success">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in items %}
+                        <tr>
+                          <td>{{ item.product.prodcut_name }}</td>
+                          <td><img src="{{ item.product.picture.url }}" class="img-fluid" style="width: 50px;"></td>
+                          <td>{{ item.product.description }}</td>
+                          <td>
+                            {% if item.product.is_sale %}
+                              {{ item.product.price | intcomma}}
+                            {% else %}
+                              <span class="text-success bi-currency-dollar">{{ item.product.price | intcomma}}</span>
+                            {% endif %}
+                          </td>
+                          <td>{{ item.quantity }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-12">
+                  <a href="{% url 'orders' %}" class="btn btn-outline-success">Back to Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

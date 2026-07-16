@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<!-- Header-->
+<main>
+    <div class="container mt-5">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="card mt-5">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <h5 class="card-title text-center fs-4 mb-1">Final Confirmation</h5>
+                  <ol class="list-group list-group-numbered">
+                    {% for product in cart_products %}
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">{{ product.prodcut_name }}</div>
+                          {% if product.is_sale %}
+                            Price: <span class="text-success bi-currency-dollar">{{ product.sale_price | intcomma }}</span>
+                          {% else %}
+                            Price: <span class="text-success bi-currency-dollar">{{ product.price | intcomma }}</span>
+                          {% endif %}
+                        </div>
+                        <span class="badge bg-success rounded-pill">
+                          {% for key,value in quantities.items %}
+                            {% if key == product.id|slugify %}
+                              Quantity: {{ value }}
+                            {% else %}
+
+                            {% endif %}
+                          {% endfor %}</span>
+                      </li>
+                      
+                    {% endfor %}
+                    
+                    <style>
+                      .no-number::before{
+                          display:none !important;
+                      }
+                    </style>
+                    <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center no-number">
+                      <b>Total Order</b> <span class="badge bg-success rounded-pill">$ {{ total_orders }}</span>
+                    </li>
+                  </ol>
+                  <div class="col-12 mt-3">
+                    <a href="{% url 'checkout' %}" class="btn btn-outline-success">Back to Checkout</a>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                  <h5 class="card-title text-center fs-4 mb-1">Send Information</h5>
+                  <form method="POST" action="{% url 'process_order' %}">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                      <li class="list-group-item">Full Name: {{ shipping_info.shipping_full_name }}</li>
+                      <li class="list-group-item">Email: {{ shipping_info.shipping_email }}</li>
+                      <li class="list-group-item">Phone: {{ shipping_info.shipping_phone }}</li>
+                      <li class="list-group-item">Address 1: {{ shipping_info.shipping_address1 }}</li>
+                      <li class="list-group-item">Address 2: {{ shipping_info.shipping_address2 }}</li>
+                      <li class="list-group-item">Province: {{ shipping_info.shipping_province }}</li>
+                      <li class="list-group-item">City: {{ shipping_info.shipping_city }}</li>
+                      <li class="list-group-item">State: {{ shipping_info.shipping_state }}</li>
+                    </ul>
+                  
+                    <div class="col-12 mt-3">
+                      <button class="btn btn-outline-success" type="submit">Save & Payment</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+</main>
+{% endblock %}

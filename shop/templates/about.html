@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+
+<main id="main" class="main" style="margin-left: 0px; margin-top: 100px;">
+  <h1 class="text-center">About Us</h1>
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-12 mt-3">
+    <img src="{% static 'assets/img/shewsoft_with_bg.png' %}" class="img-fluid w-75">
+  </div>
+  <div class="col-md-6 col-sm-6 col-12 mt-3">
+    <p align="justify">
+      ShewaSoft is an innovative company in the field of Information Technology and software development, established with the goal of delivering modern, efficient, and reliable digital solutions. By leveraging technical expertise, creativity, and experience, we provide a wide range of services, including software development, website design, information management systems, and digital solutions.
+    </p>
+    <p align="justify">
+      At ShewaSoft, we believe that technology can pave the way for the growth and success of individuals, organizations, and businesses. Therefore, we are committed to delivering high-quality products and services that meet our clients’ needs in the best possible way.
+    </p>
+  </div>
+</div>
+</main>
+{% endblock %}
