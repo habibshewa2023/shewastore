@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-+co=cyn=tu%z+g@mcu#*%&rv7v2p)quv2&ahd$cdbr#59jh@^u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://shewastore.onrender.com']
+ALLOWED_HOSTS = ['https://shewastore-1.onrender.com']
 
 
 # Application definition
