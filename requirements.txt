@@ -21,8 +21,6 @@ gTTS==2.5.4
 gunicorn==26.0.0
 h11==0.16.0
 idna==3.10
-jax==0.5.3
-jaxlib==0.5.3
 Js2Py==0.74
 kiwisolver==1.4.8
 matplotlib==3.10.1
